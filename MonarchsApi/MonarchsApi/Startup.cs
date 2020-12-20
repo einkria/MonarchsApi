@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using MonarchsApi.Repositories;
+using MonarchsApi.Services;
+
 namespace MonarchsApi
 {
     public class Startup
@@ -26,6 +29,10 @@ namespace MonarchsApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // Add injectable Helpers and Services
+            services.AddScoped<IMonarchsRepository>(m => new MonarchsRepository(Configuration.GetSection("DataLocation")["JsonPath"]));
+            services.AddScoped<IMonarchsService, MonarchsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
