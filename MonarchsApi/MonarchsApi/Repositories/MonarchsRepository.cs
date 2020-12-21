@@ -23,6 +23,7 @@ namespace MonarchsApi.Repositories
         {
             try
             {
+                // Monarchs data is stored in a json file.
                 var stringMonarchs = File.ReadAllText(_dataLocation);
 
                 return stringMonarchs;
@@ -33,8 +34,6 @@ namespace MonarchsApi.Repositories
             }
             return null;
         }
-
-        //TODO: Write test for repository + create log to file system for errors.
 
     }
 }

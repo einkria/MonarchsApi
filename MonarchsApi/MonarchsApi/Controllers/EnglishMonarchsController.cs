@@ -18,6 +18,10 @@ namespace MonarchsApi.Controllers
             _service = service;
         }
 
+        /*
+         * A GET method that delivers a list of Monarchs, if successful
+         * Endpoint: api/EnglishMonarchs
+         */
         [HttpGet]
         public ActionResult<IList<Monarch>> GetMonarchs()
         {
