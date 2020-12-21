@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using MonarchsApi.Services;
@@ -22,9 +19,19 @@ namespace MonarchsApi.Controllers
         }
 
         [HttpGet]
-        public IList<Monarch> GetMonarches()
+        public ActionResult<IList<Monarch>> GetMonarchs()
         {
-            return _service.GetMonarchs();
+            Console.WriteLine("Endpoint: GetMonarchs() - called");
+            var monarchs = _service.GetMonarchs();
+
+            if (monarchs == null)
+            {
+                Console.WriteLine("Endpoint: GetMonarchs() - returned with error, data could not be fetched");
+                return StatusCode(500);
+            }
+
+            Console.WriteLine("Endpoint: GetMonarchs() - returned with data");
+            return Ok(monarchs);
         }
     }
 }
